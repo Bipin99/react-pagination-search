@@ -24,6 +24,7 @@ export default function Search() {
         }
         const response = await res.json();
         const results = response.results;
+
         setData(results);
         setTotalPages(response.pagination.totalPages);
       } catch (error) {
@@ -48,15 +49,13 @@ export default function Search() {
   if (loading) {
     return (
       <>
-        <Input setQuery={setQuery}/>
+        <Input setQuery={setQuery} />
         <Spinner />
       </>
     );
   }
-  if(error){
-    <div>
-      {error}
-    </div>
+  if (error) {
+    <div>{error}</div>;
   }
 
   return (
@@ -74,12 +73,17 @@ export default function Search() {
                     src={ele.thumbnailImageUrl}
                     alt={ele.name}
                     loading="lazy"
-                  
                   />
                 </div>
                 <div className={styles["product-details"]}>
                   <h5>{ele.name}</h5>
-                  <p>${ele.price}</p>
+                  <div className={styles.priceblock}>
+                  <p className={styles.price}>${ele.price}</p>
+                  {ele.msrp && ele.msrp > ele.price ? (
+                    <p className={styles["msrp"]}>${ele.msrp}</p>
+                  ) : null}
+                  
+                  </div>
                 </div>
               </div>
             ))}
