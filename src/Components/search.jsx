@@ -78,11 +78,10 @@ export default function Search() {
                 <div className={styles["product-details"]}>
                   <h5>{ele.name}</h5>
                   <div className={styles.priceblock}>
-                  <p className={styles.price}>${ele.price}</p>
-                  {ele.msrp && ele.msrp > ele.price ? (
-                    <p className={styles["msrp"]}>${ele.msrp}</p>
-                  ) : null}
-                  
+                    <p className={styles.price}>${ele.price}</p>
+                    {ele.msrp && ele.msrp > ele.price ? (
+                      <p className={styles["msrp"]}>${ele.msrp}</p>
+                    ) : null}
                   </div>
                 </div>
               </div>
