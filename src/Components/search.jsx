@@ -27,12 +27,15 @@ export default function Search() {
 
         setData(results);
         setTotalPages(response.pagination.totalPages);
+        if (containerRef.current) {
+          containerRef.current.scrollIntoView({ behavior: "smooth" });
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
         setError("An error occurred while fetching data. Please try again.");
       } finally {
         setLoading(false);
-        containerRef.current.scrollIntoView({ behavior: "smooth" });
+     
       }
     };
 
@@ -55,7 +58,7 @@ export default function Search() {
     );
   }
   if (error) {
-    <div>{error}</div>;
+  return  <div>{error}</div>;
   }
 
   return (
