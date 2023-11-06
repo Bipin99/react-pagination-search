@@ -17,7 +17,7 @@ export default function Search() {
       try {
         setLoading(true);
         const res = await fetch(
-          `https://api.searchspring.net/api/search/search.json?siteId=scmq7n&q=${query}&resultsFormat=native&page=${page}`
+          `http://api.searchspring.net/api/search/search.json?siteId=scmq7n&q=${query}&resultsFormat=native&page=${page}`
         );
         if (!res.ok) {
           throw new Error("Network response was not ok");
@@ -42,6 +42,10 @@ export default function Search() {
     fetchData();
   }, [page, query]);
 
+  useEffect(() => {
+    setPage(1);
+  }, [query]);
+
   const prevHandler = () => {
     setPage((prev) => prev - 1);
   };
@@ -50,11 +54,14 @@ export default function Search() {
   };
 
   if (loading) {
+  
+    
     return (
-      <>
+      <div className={styles.loader}>
+
         <Input setQuery={setQuery} />
         <Spinner />
-      </>
+      </div>
     );
   }
   if (error) {
@@ -66,7 +73,14 @@ export default function Search() {
       <Input setQuery={setQuery} />
       {data.length > 0 ? (
         <>
+      
+            <div className={`${styles.pagination} ${styles.toppage}`}>
+            {page > 1 && <button onClick={prevHandler}>&#9664; Prev</button>}
+            {page < totalPages && <button onClick={nextHandler}>Next &#9654;</button>}
+          </div>
           <div className={styles["product-container"]}>
+
+          
             {data.map((ele) => (
               <div className={styles["product-container__card"]} key={ele.id}>
              
@@ -91,8 +105,8 @@ export default function Search() {
             ))}
           </div>
           <div className={styles.pagination}>
-            {page > 1 && <button onClick={prevHandler}>prev</button>}
-            {totalPages > page && <button onClick={nextHandler}>next</button>}
+          {page > 1 && <button onClick={prevHandler}>&#9664; Prev</button>}
+            {page < totalPages && <button onClick={nextHandler}>Next &#9654;</button>}
           </div>
         </>
       ) : (
