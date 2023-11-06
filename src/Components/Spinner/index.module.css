@@ -1,6 +1,8 @@
 /* spinner.css */
 .spinner-container {
-  top: 0px;
+  position:relative;
+  left:50%;
+
 }
 
 .spinner {

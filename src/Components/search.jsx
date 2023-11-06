@@ -17,7 +17,7 @@ export default function Search() {
       try {
         setLoading(true);
         const res = await fetch(
-          `http://api.searchspring.net/api/search/search.json?siteId=scmq7n&q=${query}&resultsFormat=native&page=${page}`
+          `https://api.searchspring.net/api/search/search.json?siteId=scmq7n&q=${query}&resultsFormat=native&page=${page}`
         );
         if (!res.ok) {
           throw new Error("Network response was not ok");
@@ -65,8 +65,8 @@ export default function Search() {
         <>
           <div className={styles["product-container"]}>
             {data.map((ele) => (
-              <div className="product-container__card" key={ele.id}>
-                <div>
+              <div className={styles["product-container__card"]} key={ele.id}>
+             
                   {" "}
                   <img
                     className={styles["product-image"]}
@@ -74,7 +74,7 @@ export default function Search() {
                     alt={ele.name}
                     loading="lazy"
                   />
-                </div>
+               
                 <div className={styles["product-details"]}>
                   <h5>{ele.name}</h5>
                   <div className={styles.priceblock}>
